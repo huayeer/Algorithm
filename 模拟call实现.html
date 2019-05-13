@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <script>
+    var a = 100
+    let object = {
+      a: 1,
+      b: 2
+    }
+    function foo (n1, n2) {
+      console.log(n1)
+      console.log(n2)
+      console.log(this.a)
+    }
+    Function.prototype.call1 = function (o) {
+      let object = o || window
+      object.fn = this
+
+      let params = []
+      for (let i = 1; i < arguments.length; i++) {
+        params.push('arguments[' + i + ']')
+      }
+      eval('object.fn(' + params +')')
+    }
+    foo.call1(object, 'lisi', 'zhangsan')
+  </script>
+</body>
+</html>

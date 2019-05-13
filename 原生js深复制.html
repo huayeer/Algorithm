@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+
+
+  function deepCody (o) {
+    let objCody = {}
+    for (let i in o) {
+      if (typeof o[i] === 'object') {
+        objCody[i] = deepCody(o[i])
+      } else {
+        objCody[i] = o[i]
+      }
+    }
+    return objCody
+
+  }
+
+  var object = {
+    a: 1,
+    b: {
+      b1: 2,
+      b2: {
+        b11: 3,
+        b22: 4
+      }
+    },
+    c: function () {
+      console.log(123)
+    }
+  }
+  var object2 = deepCody(object)
+  console.log(object2)
+
+
+</script>
+</body>
+</html>

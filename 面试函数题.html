@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+  </head>
+  <body>
+    <script type="text/javascript">
+    function Foo () {
+      getName = function () {console.log(1)}
+      return this
+    }
+    Foo.getName = function () {console.log(2)}
+    Foo.prototype.getName = function () {console.log(3)}
+    var getName = function() {console.log(4)}
+    function getName () {console.log(5)}
+
+    Foo.getName() // 2
+    getName() // 4 考察变量提升  相当于var提升 function提升  又给getName赋值
+    Foo().getName() // 1 相当于this.getName()
+    getName() // 1 相当于this.getName() 上一步已经赋值为1
+
+    // 下面三个考察运算符
+    new Foo.getName() // 2 点的优先级大于new
+    new Foo().getName() // 3
+    new new Foo().getName() // 3   1、new Foo()   2、new Foo().getName()  3、new new Foo().getName()
+    </script>
+  </body>
+</html>

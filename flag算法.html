@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+  </head>
+  <body>
+    <script>
+      var array=['a', ['b', 'c'], 2, ['d', 'e', 'f'], 'g', 3, 4];
+      // 方法一：递归
+      function flag1 (array) {
+        let newArr = [];
+        handleArray (array)
+        function handleArray (arr) {
+          arr.forEach(item => {
+            if (Array.isArray(item)) {
+              handleArray(item)
+            } else {
+              newArr.push(item)
+            }
+          })
+        }
+        console.log(newArr.join(','))
+      }
+      flag1(array)
+
+      // 方法二：运算符
+      function flag2 (array) {
+        let toString = Array.prototype.toString;
+        Array.prototype.toString = function() {
+          // join 默认逗号隔开，所以Array.prototype.toString可以不修改，如果需要其他字符隔开，就需要修改Array.prototype.toString
+          return this.join(',')
+        }
+        console.log(array + '')
+        Array.prototype.toString = toString
+      }
+
+      flag2(array)
+    </script>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <script>
+    var data = [{
+      'id': 1001,
+      'parent_id': 100,
+      'name': 'aaa'
+    },{
+      'id': 1002,
+      'parent_id': 100,
+      'name': 'aaa'
+    },{
+      'id': 2003,
+      'parent_id': 200,
+      'name': 'aaa'
+    },{
+      'id': 3004,
+      'parent_id': 300,
+      'name': 'aaa'
+    },{
+      'id': 100,
+      'parent_id': 10,
+      'name': 'aaa'
+    },{
+      'id': 200,
+      'parent_id': 20,
+      'name': 'aaa'
+    },{
+      'id': 300,
+      'parent_id': 30,
+      'name': 'aaa'
+    },{
+      'id': 10,
+      'parent_id': 0,
+      'name': 'aaa'
+    },{
+      'id': 20,
+      'parent_id': 0,
+      'name': 'aaa'
+    },{
+      'id': 30,
+      'parent_id': 0,
+      'name': 'aaa'
+    }];
+
+    var map = {};
+    data.forEach(function (item) {
+      map[item.id] = item;
+    })
+
+    data.forEach(item => {
+      let parent = map[item.parent_id]
+      if (parent) {
+        if (!parent.children) {
+          parent.children = []
+        }
+        parent.children.push(item)
+        delete map[item.id]
+      }
+
+    })
+    console.log(map)
+
+  </script>
+</body>
+</html>

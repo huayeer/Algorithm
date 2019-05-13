@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>点击删除当前行</title>
+
+  </head>
+  <body>
+    <ul class="list">
+      <li>1 <span class="del">删除</span></li>
+      <li>2 <span class="del">删除</span></li>
+      <li>3 <span class="del">删除</span></li>
+      <li>4 <span class="del">删除</span></li>
+      <li>5 <span class="del">删除</span></li>
+      <li>6 <span class="del">删除</span></li>
+    </ul>
+    <script type="text/javascript">
+      class List {
+        constructor (sel) {
+
+          this.el = Array.from(document.querySelectorAll(sel))
+          var self = this
+          this.el.forEach(item => {
+            item.addEventListener('click', function (e) {
+              if (e.target.nodeName === 'SPAN') {
+                self.deleteDom.call(self, e.target)
+              }
+            })
+          })
+        }
+        deleteDom (target) {
+          let self = this
+          let findParent = function (node) {
+            let parent = node.parentNode
+            let root = self.el.find((item) => item === parent)
+            if (root) {
+              root.removeChild(node)
+            } else {
+              findParent(parent)
+            }
+          }
+          findParent(target)
+        }
+      }
+      new List('.list')
+    </script>
+  </body>
+</html>
