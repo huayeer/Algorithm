@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 输出原则
+  // 1、输出同步 Promise实例为同步输出
+  // 2、输出Promise then
+  // 3、输出setTimeout
+
+  let int = 1;
+  setTimeout(function() {
+    console.log(int) // 5 第5个输出
+    int = 2
+    new Promise((resolve, reject) => {
+      resolve()
+    }).then(function() {
+      console.log(int) // 2 第7个输出
+      int = 7
+    })
+    console.log(int) // 2 第6个输出
+  })
+  int = 3
+  console.log(int) // 3 第1个输出
+  new Promise((resolve, reject) => {
+    console.log(int) // 3 第2个输出
+    return resolve(int = 4)
+  }).then(function(res) {
+    console.log(int) // 4 第4个输出
+    int = 5
+    setTimeout(function() {
+      console.log(int) // 7 第8个输出
+      int = 8
+    })
+    return false
+  })
+
+  console.log(int) // 4 第3个输出
+</script>
+
+</body>
+</html>
